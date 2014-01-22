@@ -22,9 +22,9 @@
 		}
 	})
 
-*data-title: Error description. With $(invalids[i]).attr('data-title') you can get it. For bootstrap3Validate just put it there you don't need to do anything
-*data-regex: Validation regex. You can also put 'email' and 'tel'
-*data-require: required or not
+* data-title: Error description. With $(invalids[i]).attr('data-title') you can get it. For bootstrap3Validate just put it there you don't need to do anything
+* data-regex: Validation regex. You can also put 'email' and 'tel'
+* data-require: required or not
 
 # For bootstrap3:
 ###CSS
