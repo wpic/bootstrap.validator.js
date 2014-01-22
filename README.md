@@ -13,7 +13,7 @@
 		data-equals="name_or_the_second_field"
 	/>
 
-###CSS
+###Javascript
 	$(selector).validate({
 		init: function() {
 
@@ -40,7 +40,7 @@
 	}
 ###HTML
 	<form id="add_subscriber" method="POST" action="/api?api=management&amp;add=subscriber">
-		<feildset>
+		<fieldset>
 			<!-- if edit == true, server make you able to override subscriber -->
 			<input type="text" name="edit" />
 
@@ -62,7 +62,7 @@
 			<div class="form-group text-center">
 				<button class="btn btn-default" type="submit">Submit</button>
 			</div>
-		</feildset>
+		</fieldset>
 	</form>
 ###Javascript
 	$(selector).bootstrap3Validate(function(e) {
