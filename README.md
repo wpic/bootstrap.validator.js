@@ -7,6 +7,7 @@
 		data-title="This is a message show after validation failed"
 		data-regex="^[a-z]{1,10}"
 		data-require=""
+		data-equals='name_or_the_second_field'
 	/>
 
 ###CSS
@@ -25,6 +26,7 @@
 * data-title: Error description. With $(invalids[i]).attr('data-title') you can get it. For bootstrap3Validate just put it there you don't need to do anything
 * data-regex: Validation regex. You can also put 'email' and 'tel'
 * data-require: required or not
+* data-equals: To check value of 2 field are same or not. Just add it to first one.
 
 # For bootstrap3:
 ###CSS
