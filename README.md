@@ -16,7 +16,7 @@
 		success: function() {
 
 		},
-		fail: function() {
+		fail: function(invalids) {
 
 		}
 	})
