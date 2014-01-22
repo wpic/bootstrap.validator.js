@@ -7,7 +7,7 @@
 		data-title="This is a message show after validation failed"
 		data-regex="^[a-z]{1,10}"
 		data-require=""
-		data-equals='name_or_the_second_field'
+		data-equals="name_or_the_second_field"
 	/>
 
 ###CSS
