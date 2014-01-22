@@ -1,5 +1,5 @@
 # How to use it?
-
+###HTML
 	<input
 		name="name"
 		type="text"
@@ -9,6 +9,7 @@
 		data-require=""
 	/>
 
+###CSS
 	$(selector).validate({
 		init: function() {
 
@@ -21,7 +22,11 @@
 		}
 	})
 
-## For bootstrap3:
+*data-title: Error description. With $(invalids[i]).attr('data-title') you can get it. For bootstrap3Validate just put it there you don't need to do anything
+*data-regex: Validation regex. You can also put 'email' and 'tel'
+*data-require: required or not
+
+# For bootstrap3:
 ###CSS
 	form .alert,
 	form .process
