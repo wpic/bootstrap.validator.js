@@ -64,7 +64,8 @@
 
 		$.ajax({
 			url: $(this).attr('action'),
-			data: $(this).serialize()
+			data: $(this).serialize(),
+			type: $(this).attr('method'),
 		})
 		.done(function() {
 			$("[type='text']", self).val(''); // Clear
