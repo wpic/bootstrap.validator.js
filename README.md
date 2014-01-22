@@ -1,4 +1,7 @@
 # How to use it?
+
+![Screenshot](screenshot.png "bootstrap.validator.js")
+
 ###HTML
 	<input
 		name="name"
