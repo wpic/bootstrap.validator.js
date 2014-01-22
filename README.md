@@ -1,5 +1,5 @@
 # How to use it?
-<pre><code>
+<pre>
 <input
 	name='name'
 	type='text'
@@ -8,4 +8,4 @@
 	data-regex='^[a-z]{1,10}'
 	data-require=''
  />
- </code></pre>
+ </pre>
