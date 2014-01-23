@@ -1,12 +1,12 @@
 (function ( $ ) {
 
-    $.fn.validate = function( options ) {
+	$.fn.validate = function( options ) {
 
-        var settings = $.extend({
-            init: function() {},
-            success: function() {},
-            fail: function(invalids) {}
-        }, options );
+		var settings = $.extend({
+			init: function() {},
+			success: function() {},
+			fail: function(invalids) {}
+		}, options );
 
 
         return this.on('submit', function(e) {
@@ -36,7 +36,7 @@
                     if(regex == 'email') {
                         r = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     } else if(regex == 'tel') {
-                        r = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+                        r = /^[0-9\-\+]{3,25}$/;
                     } else {
                         r = new RegExp(regex);
                     }
@@ -61,36 +61,39 @@
     $.fn.bootstrap3Validate = function(success) {
         return this.validate({
 			'init': function() {
-			    //alert($('.has-error', this).removeClass('has-error').find('input').length);
 				$('.has-error', this).removeClass('has-error').find('input').tooltip('destroy');
 				$('.alert').hide();
 				$('[rel=tooltip]', this).tooltip('destroy');
 			},
 			'success': function(e) {
-			    if (typeof(success) === 'function') {
-				    success.call(this, e);
+				// clear form
+				$("[type='text'],[type='password'],[type='tel'],[type='email'],textarea", self).val('');
+				$("select", self).prop("selectedIndex", 0);
+
+				if (typeof(success) === 'function') {
+					success.call(this, e);
 				}
 			},
 			'fail': function(invalids) {
 				var form = this;
 
 				$(invalids).closest('.form-group').addClass('has-error').find('input,select,textarea').each(function(i) {
-				    var text = $(this).attr('data-title');
-                    if(!text) {
-                        text = $(this).attr('placeholder');
-                    }
+					var text = $(this).attr('data-title');
+					if(!text) {
+						text = $(this).attr('placeholder');
+					}
 
-                    if(text) {
-                        $(this).tooltip({'trigger':'focus', placement: 'top', title: text});
+					if(text) {
+						$(this).tooltip({'trigger':'focus', placement: 'top', title: text});
 
-                        if(i == 0) {
-                            $('.alert-danger', form).show().text(text);
-                            this.focus();
-                        }
+						if(i == 0) {
+							$('.alert-danger', form).show().text(text);
+							this.focus();
+						}
 					}
 				});
 			},
 		});
-    }
+	}
 
 }( jQuery ));
