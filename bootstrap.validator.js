@@ -67,9 +67,6 @@
 			},
 			'success': function(e) {
 				// clear form
-				$("[type='text'],[type='password'],[type='tel'],[type='email'],textarea", this).val('');
-				$("select", this).prop("selectedIndex", 0);
-
 				if (typeof(success) === 'function') {
 					success.call(this, e);
 				}
