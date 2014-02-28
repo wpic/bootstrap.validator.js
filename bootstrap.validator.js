@@ -22,6 +22,8 @@
                 var equals = self.attr('data-equals');
                 var value = self.val();
 
+                if(self.is("[type='checkbox']") && !self.is(":checked")) value='';
+
                 if(typeof(equals) != 'undefined') {
                     var target = $("[name='" + equals + "']", form);
                     var value2 = target.val();
@@ -61,12 +63,11 @@
     $.fn.bootstrap3Validate = function(success) {
         return this.validate({
 			'init': function() {
-				$('.has-error', this).removeClass('has-error').find('input').tooltip('destroy');
+				$('.has-error', this).removeClass('has-error').find('input,textarea').tooltip('destroy');
 				$('.alert').hide();
 				$('[rel=tooltip]', this).tooltip('destroy');
 			},
 			'success': function(e) {
-				// clear form
 				if (typeof(success) === 'function') {
 					success.call(this, e);
 				}
