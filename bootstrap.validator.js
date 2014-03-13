@@ -15,6 +15,20 @@
 
             settings.init.call(form);
 
+            var data = {};
+            $('input,textarea,select', this).each(function() {
+                var i = $(this);
+                var name = i.attr('name');
+                if(typeof(name) != 'undefined' && (i.is(":not([type='checkbox'])") || i.is(":checked"))) {
+                    var value = i.val();
+                    if(typeof(data[name]) != 'undefined') {
+                        data[name] += ' ' + value;
+                    } else {
+                        data[name] = value;
+                    }
+                }
+            });
+
             $("[data-regex],[data-require],[required],[data-equals]", form).each(function() {
                 var self = $(this);
                 var regex = self.attr('data-regex');
@@ -23,6 +37,12 @@
                 var value = self.val();
 
                 if(self.is("[type='checkbox']") && !self.is(":checked")) value='';
+
+                // replace value with total value
+                var name = self.attr('name');
+                if(typeof(name) != 'undefined') {
+                    value = data[name];
+                }
 
                 if(typeof(equals) != 'undefined') {
                     var target = $("[name='" + equals + "']", form);
@@ -52,42 +72,45 @@
 
             if(invalids.length > 0) {
                 e.preventDefault();
-                settings.fail.call(form, invalids);
+                settings.fail.call(form, invalids, data);
             } else {
-                settings.success.call(form, e);
+                settings.success.call(form, e, data);
             }
         });
 
     };
 
-    $.fn.bootstrap3Validate = function(success) {
+    $.fn.bootstrap3Validate = function(success, data) {
         return this.validate({
 			'init': function() {
 				$('.has-error', this).removeClass('has-error').find('input,textarea').tooltip('destroy');
 				$('.alert').hide();
 				$('[rel=tooltip]', this).tooltip('destroy');
 			},
-			'success': function(e) {
+			'success': function(e, data) {
 				if (typeof(success) === 'function') {
-					success.call(this, e);
+					success.call(this, e, data);
 				}
 			},
 			'fail': function(invalids) {
 				var form = this;
 
 				$(invalids).closest('.form-group').addClass('has-error').find('input,select,textarea').each(function(i) {
-					var text = $(this).attr('data-title');
+				    var target = $(this);
+					var text = target.attr('data-title');
 					if(!text) {
-						text = $(this).attr('placeholder');
+						text = target.attr('placeholder');
 					}
 
 					if(text) {
-						$(this).tooltip({'trigger':'focus', placement: 'top', title: text});
+					    if(!target.is("[type='checkbox']")) {
+					        target.tooltip({'trigger':'focus', placement: 'top', title: text});
+					    }
 
-						if(i == 0) {
-							$('.alert-danger', form).show().text(text);
-							this.focus();
-						}
+					    if(i == 0) {
+                            $('.alert-danger', form).show().text(text);
+                            this.focus();
+                        }
 					}
 				});
 			},

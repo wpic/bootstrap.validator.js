@@ -12,6 +12,9 @@
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 
 	<style>
+	body {
+		padding-top: 15px;
+	}
 	form .alert {
 		display: none;
 	}
@@ -31,27 +34,74 @@
 
 
 <div class='container'>
+	<div class="row">
+		<div class="col-lg-12">
+			<p>Put this file in remote or local HTTP server to work (you can not open with browser directly because of CDN)</p>
+		</div>
+	</div>
 
 	<div class="row">
-		<div class="col-md-3 well">
-			<form>
-				<feildset>
-					<div class="form-group">
-						<label class="control-label">Email:</label>
-						<input data-title="Please use valid Email address" name="email" class="form-control" data-require="" placeholder="Subscriber email" data-regex="email" />
-					</div>
-					<div class="form-group">
-						<label class="control-label">Password:</label>
-						<input data-title="Please enter valid password" data-require="" name="name" class="form-control" placeholder="Subscriber name" />
-					</div>
-					<div class="alert alert-danger">
+		<div class="col-md-3">
+			<div class="well">
+				<form>
+					<feildset>
+						<div class="form-group">
+							<label class="control-label">Email:</label>
+							<input data-title="Please use valid Email address" name="email" class="form-control" data-require="" placeholder="Subscriber email" data-regex="email" />
+						</div>
+						<div class="form-group">
+							<label class="control-label">Password:</label>
+							<input data-title="Please enter valid password" data-require="" name="name" class="form-control" placeholder="Subscriber name" />
+						</div>
+						<div class="alert alert-danger">
 
-					</div>
-					<div class="form-group text-center">
-						<button class="btn btn-default" type="submit">Submit</button>
-					</div>
-				</feildset>
-			</form>
+						</div>
+						<div class="form-group text-center">
+							<button class="btn btn-default" type="submit">Submit</button>
+						</div>
+					</feildset>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="well">
+				<form>
+					<feildset>
+						<div class="form-group" style="margin: 0">
+							<div class="checkbox">
+								<label>
+									<input data-title="Select one" data-require="" name="item" type="checkbox" value="1" />First
+								</label>
+							</div>
+						</div>
+						<div class="form-group" style="margin: 0">
+							<div class="checkbox">
+								<label>
+									<input data-require="" name="item" type="checkbox" value="2" />Second
+								</label>
+							</div>
+						</div>
+						<div class="form-group" style="margin: 0">
+							<div class="checkbox">
+								<label>
+									<input data-require="" name="item" type="checkbox" value="3" />Third
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Name:</label>
+							<input data-title="Please enter your name" name="email" class="form-control" data-require="" placeholder="Your name" data-regex="^(?![0-9]).*?$" />
+							<!-- ^(?![0-9]).*?$   means should not start with number -->
+						</div>
+						<div class="alert alert-danger">
+
+						</div>
+						<div class="form-group text-center">
+							<button class="btn btn-default" type="submit">Submit</button>
+						</div>
+					</feildset>
+				</form>
+			</div>
 		</div>
 	</div>
 
@@ -62,12 +112,10 @@
 <script src="bootstrap.validator.js"></script>
 <script>
 // ---------- add subscribers --------------
-$('form').bootstrap3Validate(function(e) {
-    e.preventDefault();
+$('form').bootstrap3Validate(function(e, data) {
+	e.preventDefault();
 
-    var form = $(this);
-
-    alert(form.serialize());
+    alert(JSON.stringify(data));
 });
 </script>
 
