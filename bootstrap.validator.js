@@ -1,12 +1,12 @@
 (function ( $ ) {
 
-	$.fn.validate = function( options ) {
+    $.fn.validate = function( options ) {
 
-		var settings = $.extend({
-			init: function() {},
-			success: function() {},
-			fail: function(invalids) {}
-		}, options );
+        var settings = $.extend({
+            init: function() {},
+            success: function() {},
+            fail: function(invalids) {}
+        }, options );
 
 
         return this.on('submit', function(e) {
@@ -44,18 +44,20 @@
                     value = data[name];
                 }
 
-                if(typeof(equals) != 'undefined') {
-                    var target = $("[name='" + equals + "']", form);
-                    var value2 = target.val();
-                    if(value != value2) {
+                if(typeof(equals) != 'undefined' && typeof(data[equals]) != 'undefined') {
+                    if(value != data[equals]) {
                         invalids.push(this);
-                        invalids.push(target.get(0));
+                        invalids.push($("[name='" + equals + "']")[0]);
                     }
                 }
 
                 if(value && value.length > 0) {
                     var r;
-                    if(regex == 'email') {
+                    if(regex == 'name+family') {
+                        r = /^((?![0-9]).+\s.+)/g;
+                    } else if(regex == 'name' || regex == 'family') {
+                        r = /^((?![0-9]).+)/g;
+                    } else if(regex == 'email') {
                         r = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     } else if(regex == 'tel') {
                         r = /^[0-9\-\+]{3,25}$/;
@@ -82,39 +84,39 @@
 
     $.fn.bootstrap3Validate = function(success, data) {
         return this.validate({
-			'init': function() {
-				$('.has-error', this).removeClass('has-error').find('input,textarea').tooltip('destroy');
-				$('.alert').hide();
-				$('[rel=tooltip]', this).tooltip('destroy');
-			},
-			'success': function(e, data) {
-				if (typeof(success) === 'function') {
-					success.call(this, e, data);
-				}
-			},
-			'fail': function(invalids) {
-				var form = this;
+            'init': function() {
+                $('.has-error', this).removeClass('has-error').find('input,textarea').tooltip('destroy');
+                $('.alert').hide();
+                $('[rel=tooltip]', this).tooltip('destroy');
+            },
+            'success': function(e, data) {
+                if (typeof(success) === 'function') {
+                    success.call(this, e, data);
+                }
+            },
+            'fail': function(invalids) {
+                var form = this;
 
-				$(invalids).closest('.form-group').addClass('has-error').find('input,select,textarea').each(function(i) {
-				    var target = $(this);
-					var text = target.attr('data-title');
-					if(!text) {
-						text = target.attr('placeholder');
-					}
+                $(invalids).closest('.form-group').addClass('has-error').find('input,select,textarea').each(function(i) {
+                    var target = $(this);
+                    var text = target.attr('data-title');
+                    if(!text) {
+                        text = target.attr('placeholder');
+                    }
 
-					if(text) {
-					    if(!target.is("[type='checkbox']")) {
-					        target.tooltip({'trigger':'focus', placement: 'top', title: text});
-					    }
+                    if(text) {
+                        if(!target.is("[type='checkbox']")) {
+                            target.tooltip({'trigger':'focus', placement: 'top', title: text});
+                        }
 
-					    if(i == 0) {
+                        if(i == 0) {
                             $('.alert-danger', form).show().text(text);
                             this.focus();
                         }
-					}
-				});
-			},
-		});
-	}
+                    }
+                });
+            },
+        });
+    }
 
 }( jQuery ));

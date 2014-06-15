@@ -35,18 +35,36 @@
 <div class='container'>
 	<div class="row">
 		<div class="col-lg-12">
-			<p>Put this file in remote or local HTTP server to work (you can not open with browser directly because of CDN)</p>
+			<small>
+				<p>you can not open this file with browser directly because of JQuery and Bootstrap CDN links</p>
+				<ul>
+					<li><b>Use PHP:</b>$ php -S 0.0.0.0:8000 <b> then open </b> http://localhost:8000</li>
+					<li><b>Use Python2:</b>$ python -m SimpleHTTPServer <b> then open </b> http://localhost:8000</li>
+					<li><b>Use Python3:</b>$ python -m http.server 8000 <b> then open </b> http://localhost:8000</li>
+					<li>Or use any HTTP server that you want (Just copy the file somewhere)</li>
+				</ul>
+			</small>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-3">
 			<div class="well">
+
+				<!-- sample form1 -->
 				<form>
 					<feildset>
 						<div class="form-group">
 							<label class="control-label">Email:</label>
 							<input data-title="Please use valid Email address" name="email" class="form-control" data-require="" placeholder="Subscriber email" data-regex="email" />
+						</div>
+						<div class="form-group">
+							<label class="control-label">Gender:</label>
+							<select data-title="Please select gender" name="gender" class="form-control" data-require="">
+								<option>Choose</option>
+								<option value="mail">Male</option>
+								<option value="female">Female</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Password:</label>
@@ -60,16 +78,20 @@
 						</div>
 					</feildset>
 				</form>
+
+
 			</div>
 		</div>
 		<div class="col-md-3">
 			<div class="well">
+
+				<!-- sample form2 -->
 				<form>
 					<feildset>
 						<div class="form-group" style="margin: 0">
 							<div class="checkbox">
 								<label>
-									<input data-title="Select one" data-require="" name="item" type="checkbox" value="1" />First
+									<input data-title="Select First, Second or Third" data-require="" name="item" type="checkbox" value="1" />First
 								</label>
 							</div>
 						</div>
@@ -99,6 +121,30 @@
 							<button class="btn btn-default" type="submit">Submit</button>
 						</div>
 					</feildset>
+
+
+				</form>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="well">
+
+				<!-- sample form3 -->
+				<form>
+					<feildset>
+						<div class="form-group">
+							<label class="control-label">Zip code:</label>
+							<input data-title="Should be numeric with at least 6 number" name="zip" class="form-control" data-require="" data-regex="^[0-9]{6,20}$" />
+						</div>
+						<div class="alert alert-danger">
+
+						</div>
+						<div class="form-group text-center">
+							<button class="btn btn-default" type="submit">Submit</button>
+						</div>
+					</feildset>
+
+
 				</form>
 			</div>
 		</div>
