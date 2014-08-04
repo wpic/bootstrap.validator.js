@@ -19,7 +19,7 @@
             $('input,textarea,select', this).each(function() {
                 var i = $(this);
                 var name = i.attr('name');
-                if(typeof(name) != 'undefined' && (i.is(":not([type='checkbox'])") || i.is(":checked"))) {
+                if(typeof(name) != 'undefined' && (i.is(":not([type='checkbox'],[type='radio'])") || i.is(":checked"))) {
                     var value = i.val();
                     if(typeof(data[name]) != 'undefined') {
                         data[name] += ' ' + value;
