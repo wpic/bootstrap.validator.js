@@ -1,6 +1,6 @@
 ![Screenshot](screenshot.png "bootstrap.validator.js")
 
-[http://wpic.bitbucket.org/bootstrap-validator/](Online demo)
+[Online demo](http://wpic.bitbucket.org/bootstrap-validator/)
 
 Very simple and fast regex based form validator for Bootstap3. Also, you can use it without boostrap. It work perfect with Chrome, Firefox IE7+, and mobile browsers. It can also use HTML5 form fallback if javascript does not work (disabled).
 
