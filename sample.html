@@ -60,15 +60,15 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label">Gender:</label>
-							<select data-title="Please select gender" name="gender" class="form-control" data-require="">
-								<option>Choose</option>
+							<select data-title="Please select gender" name="gender" class="form-control" required>
+								<option value="">Choose</option>
 								<option value="mail">Male</option>
 								<option value="female">Female</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Password:</label>
-							<input data-title="Please enter valid password" data-require="" name="name" class="form-control" placeholder="Subscriber name" />
+							<input data-title="Please enter valid password" required name="name" class="form-control" placeholder="Subscriber name" />
 						</div>
 						<div class="alert alert-danger">
 
@@ -91,28 +91,33 @@
 						<div class="form-group" style="margin: 0">
 							<div class="checkbox">
 								<label>
-									<input data-title="Select First, Second or Third" data-require="" name="item" type="checkbox" value="1" />First
+									<!-- we use 'data-required' not 'required' for checkbox, beacuse in non-script mode, browser force user to check them all -->
+									<input data-title="Select First, Second or Third" data-required='' name="item" type="checkbox" value="1" />First
 								</label>
 							</div>
 						</div>
 						<div class="form-group" style="margin: 0">
 							<div class="checkbox">
 								<label>
-									<input data-require="" name="item" type="checkbox" value="2" />Second
+									<input data-required='' name="item" type="checkbox" value="2" />Second
 								</label>
 							</div>
 						</div>
 						<div class="form-group" style="margin: 0">
 							<div class="checkbox">
 								<label>
-									<input data-require="" name="item" type="checkbox" value="3" />Third
+									<input data-required='' name="item" type="checkbox" value="3" />Third
 								</label>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label">Name:</label>
-							<input data-title="Please enter your name" name="email" class="form-control" data-require="" placeholder="Your name" data-regex="^(?![0-9]).*?$" />
+							<input data-title="Please enter your name" name="email" class="form-control" required placeholder="Your name" data-regex="^(?![0-9]).*?$" />
 							<!-- ^(?![0-9]).*?$   means should not start with number -->
+						</div>
+						<div class="form-group">
+							<label class="control-label">Date:</label>
+							<input data-title="Please enter your name" name="date" class="form-control" required placeholder="Date plz!" type="date" />
 						</div>
 						<div class="alert alert-danger">
 
@@ -134,7 +139,7 @@
 					<feildset>
 						<div class="form-group">
 							<label class="control-label">Zip code:</label>
-							<input data-title="Should be numeric with at least 6 number" name="zip" class="form-control" data-require="" data-regex="^[0-9]{6,20}$" />
+							<input data-title="Should be numeric with at least 6 number" name="zip" class="form-control" required data-regex="^[0-9]{6,20}$" />
 						</div>
 						<div class="alert alert-danger">
 
