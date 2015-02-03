@@ -1,6 +1,8 @@
 ![Screenshot](screenshot.png "bootstrap.validator.js")
 
-Very simple and fast regex based form validator for Bootstap3. Also, you can use it without boostrap. It work perfect with Chrome, Firefox IE7+, and mobile browsers.
+[http://wpic.bitbucket.org/bootstrap-validator/](Online demo)
+
+Very simple and fast regex based form validator for Bootstap3. Also, you can use it without boostrap. It work perfect with Chrome, Firefox IE7+, and mobile browsers. It can also use HTML5 form fallback if javascript does not work (disabled).
 
 # How to use (with bootstrap)
 
@@ -19,11 +21,11 @@ Very simple and fast regex based form validator for Bootstap3. Also, you can use
 		<fieldset>
 			<div class="form-group">
 				<label class="control-label">Sample:</label>
-				<input name="name" class="form-control" placeholder="Sample item" data-title="Sample message" data-require="" data-regex="^[a-zA-Z]{1,30}$" />
+				<input name="name" class="form-control" placeholder="Sample item" data-title="Sample message" required="" data-regex="^[a-zA-Z]{1,30}$" />
 			</div>
 			<div class="form-group">
 				<label class="control-label">Email:</label>
-				<input name="name" class="form-control" placeholder="Your email" data-title="Please use valid email address" data-require="" data-regex="email" />
+				<input name="name" class="form-control" placeholder="Your email" data-title="Please use valid email address" required="" data-regex="email" />
 			</div>
 			<div class="form-group">
 				<label class="control-label">Select</label>
@@ -136,7 +138,7 @@ Means just numbers between 10~99
 
 You can find thousand of sample regex by Goolging.
 
-**data-require:**
+**required:**
 
 required or not
 
