@@ -9,6 +9,16 @@
             /* join: ' ' */ /* Join array field data with it - If it be empty it will still remain array */
         }, options );
 
+        var validators = {
+            'name+family': /^((?![0-9]).+\s.+)/g,
+            'name': /^((?![0-9]).+)/g,
+            'family': /^((?![0-9]).+)/g,
+            'number': /^[0-9]+/g,
+            'url': /^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/,
+            'date': /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+            'email': /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            'tel': /^[0-9\-\+]{3,25}$/
+        };
 
         return this.on('submit', function(e) {
             var form = this;
@@ -67,34 +77,23 @@
                 /** array is always valid, because for array inputs we just check required **/
                 if(!Array.isArray(value)) {
                     if(value && value.length > 0) {
+                        // try to use tag name for regex
                         if (typeof(regex) == 'undefined') {
-                            var type = self.attr('type');
-                            if(type && !$.inArray(type.toLowerCase(), ['text', 'checkbox', 'radio'])) {
+                            var type = $(this).attr('type');
+                            if (typeof(type) != 'undefined' && typeof(validators[type.toLowerCase()]) != 'undefined') {
                                 regex = type.toLowerCase();
                             }
                         }
+
                         if (regex) {
-                            var r = (function(regex) {
-                                switch(regex) {
-                                    case 'name+family':
-                                        return /^((?![0-9]).+\s.+)/g;
-                                    case 'name':
-                                    case 'family':
-                                        return /^((?![0-9]).+)/g;
-                                    case 'number':
-                                        return /^[0-9]+/g;
-                                    case 'url':
-                                        return /^(ht|f)tps?:\/\/[a-z0-9-\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?$/;
-                                    case 'date':
-                                        return /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
-                                    case 'email':
-                                        return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                                    case 'tel':
-                                        return /^[0-9\-\+]{3,25}$/;
-                                    default:
-                                        return new RegExp(regex);
-                                }
-                            })(regex);
+                            var r;
+                            if (typeof(predefinedValidators[regex]) != 'undefined') {
+                                r = predefinedValidators[regex]
+                            }
+                            // Use regex itself
+                            else {
+                                r = new RegExp(regex);
+                            }
 
                             if(!r.test(value)) {
                                 invalids.push(this);
