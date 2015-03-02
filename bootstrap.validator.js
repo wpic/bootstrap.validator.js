@@ -87,8 +87,8 @@
 
                         if (regex) {
                             var r;
-                            if (typeof(predefinedValidators[regex]) != 'undefined') {
-                                r = predefinedValidators[regex]
+                            if (typeof(validators[regex]) != 'undefined') {
+                                r = validators[regex]
                             }
                             // Use regex itself
                             else {
@@ -123,7 +123,7 @@
             'init': function() {
                 $('.has-error', this).removeClass('has-error').find('input,textarea').tooltip('destroy');
                 $('.alert').hide();
-                $('[rel=tooltip]', this).tooltip('destroy');
+                $('[tooltip]', this).tooltip('destroy');
             },
             'success': function(e, data) {
                 if (typeof(success) === 'function') {
