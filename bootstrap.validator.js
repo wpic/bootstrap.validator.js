@@ -123,7 +123,7 @@
             'init': function() {
                 $('.has-error', this).removeClass('has-error').find('input,textarea').tooltip('destroy');
                 $('.alert').hide();
-                $('[tooltip]', this).tooltip('destroy');
+                $("[role='tooltip']", this).tooltip('destroy');
             },
             'success': function(e, data) {
                 if (typeof(success) === 'function') {
