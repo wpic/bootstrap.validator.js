@@ -1,3 +1,8 @@
+/**
+* Bootstrap.validator plugin for JQuery and Bootstrap 3.
+* https://github.com/wpic/bootstrap.validator.js
+* By Hamed Abdollahpour 2014 - WPIC Co
+*/
 (function ( $ ) {
 
     $.fn.validate = function( options ) {
@@ -27,8 +32,11 @@
             settings.init.call(form);
 
             var data = {};
-            $('input,textarea,select', this).each(function() {
+            $('input,textarea,select', this).filter(":visible,[type='hidden']").each(function() {
                 var i = $(this);
+                if(!i.parent().is(':visible')) {
+                    return;
+                }
                 var name = i.attr('name');
                 if(typeof(name) != 'undefined' && (i.is(":not([type='checkbox'],[type='radio'])") || i.is(":checked"))) {
                     var value = i.val();
@@ -51,7 +59,7 @@
             }
 
             /** [data-require] is deprecated use requried instead **/
-            $("[data-regex],[data-require],[data-required],[required],[data-equals]", form).each(function() {
+            $("[data-regex],[data-require],[data-required],[required],[data-equals]", form).filter(':visible').each(function() {
                 var self = $(this);
 
                 var regex = self.attr('data-regex');
