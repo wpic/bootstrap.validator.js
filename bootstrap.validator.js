@@ -67,6 +67,11 @@
                 var equals = self.attr('data-equals');
                 var value = self.val();
 
+                // Check if the user has activated no-check-if-disabled
+                if (self.attr('no-check-if-disabled') && self.is(":disabled")){
+                    return;
+                }
+
                 if(self.is("[type='checkbox']") && !self.is(":checked")) value='';
 
                 // replace value with total value
